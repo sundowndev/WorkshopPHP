@@ -8,6 +8,8 @@ Repo git du workshop php de la web1 p2020 du 02/02/18.
 2. une base de données
 3. TP mini projet
 
+# LISEZ L'HISTOIRE
+
 ## Organisation des fichiers et fonctionnement
 
 Le fonctionnement du mini projet est très simple, un fichier `config.php` dans `./app/config` sert à initialiser les constantes et les variables propres aux metas du site, `db.php` contient les informations de connexion à la base de donnée.
