@@ -36,6 +36,8 @@ Les pages dans `./public` contiennent du HTML et appellent un fichier php (modè
         |-- delete_article.php
 ~~~
 
+<p class="text-center"><img src="doc/architecture.png" alt=""></p>
+
 ## Intéraction avec la base de donnée
 ...
 
