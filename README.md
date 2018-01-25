@@ -2,10 +2,8 @@
 
 Repo git du workshop php de la web1 p2020 du 02/02/18.
 
-## cours
-
 1. PHP, MySQL, Composer.. c koi ?
-2. une base de données
+2. les bdd (+adminer/phpmyadmin)
 3. TP mini projet
 
 # LISEZ L'HISTOIRE
@@ -53,6 +51,14 @@ L'injection SQL est impossible car les requête sont préparées et ce principe 
 
 #### La faille CSRF
 <a href="https://openclassrooms.com/courses/protegez-vous-efficacement-contre-les-failles-web/la-csrf">La faille CSRF</a> (à ne pas confondre avec <a href="https://openclassrooms.com/courses/protegez-vous-efficacement-contre-les-failles-web/faille-crlf">CRLF</a>) est une faille qui consiste à utiliser l'URL d'un script pour effectuer une action par le biai d'un utilisateur qui en a l'accès. Notre page delete_article.php est accessible par tous, mais il s'agit d'une page qu'on appelle avec la méthode GET, autrement dit, quelqu'un pourrait vous envoyer le lien pour que vous supprimiez votre article involontairement. On contourne le problème avec l'utilisation d'un **token CSRF**. C'est un token propre à la session que vous êtes le seul à détenir, elle change à chaque connexion. On indique le token en paramètre dans l'url et on vérifie simplement si il correspond avec celui de la session.
+
+## Le serveur php
+
+~~~ bash
+php -S localhost:8000 -t ./public
+~~~
+
+Le paramètre `-t ./public` permet d'indiquer à php d'utiliser le dossier public comme racine du serveur. Tout ce qui est en dehors du dossier public sera donc inaccessible par l'utilisateur.
 
 ## Utile pour votre SI
 ...
