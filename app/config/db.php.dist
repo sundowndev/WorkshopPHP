@@ -1,0 +1,10 @@
+<?php
+
+// Fichier vierge à ne pas utiliser, il ne sert qu'à ignorer les changement sur le fichier contenant les informations de la BDD
+$db = [
+  'host' => '127.0.0.1',
+  'dbname' => 'workshop',
+  'user' => 'root',
+  'password' => '',
+  'charset' => 'utf8'
+];
