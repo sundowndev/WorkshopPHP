@@ -1,6 +1,5 @@
 <?php
-  include( APP . '/db.php');
-  include( APP . '/config.php');
+  include( APP . '/system.php');
 
   // include( MODELS . '/create_article.php');
 ?>
