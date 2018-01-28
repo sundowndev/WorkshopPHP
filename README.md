@@ -10,15 +10,15 @@ Repo git du workshop php de la web1 p2020 du 02/02/18.
 
 ## Organisation des fichiers et fonctionnement
 
-Le fonctionnement du mini projet est très simple, un fichier `config.php` dans `./app/config` sert à initialiser les constantes et les variables propres aux metas du site, `db.php` contient les informations de connexion à la base de donnée.
+Le fonctionnement du mini projet est très simple, un fichier `system.php` dans `./app/config` sert à initialiser les constantes et la connexion à la base de donnée (BDD ou DB en anglais), `db.php` contient les informations de connexion à la base de donnée.
 
-Dans `./public` se trouve les fichiers publiques : les assets (css, js, images ...) ainsi que les pages répondants aux fonctions d'un CRUD (Create Read Update Delete).
+Dans `./public` se trouve les fichiers publiques : les assets (css, js, images ...) ainsi que les pages disponibles, répondants aux fonctions de base d'un CRUD (Create Read Update Delete).
 
 Les pages dans `./public` contiennent du HTML et appellent un fichier php (modèle) dans `./models` permettant le traitement des données. On sépare volontairement le traitement des données du HTML (la vue) pour une meilleure organisation et une meilleure lisibilité. Cela vous permettra de vous familiariser avec le principe du MVC (Modèle Vue Controlleur), dont le principe est de séparer chaque action du programme (notamment avec l'utilisation de l'orienté objet) pour une meilleure stabilité et flexibilité. Ici, il n'y a pas de vue ou de controller, c'est juste un début de mvc.
 
 ~~~
     |-- app/config/
-        |-- config.php
+        |-- system.php
         |-- db.php
         |-- db.php.dist
     |-- models/
