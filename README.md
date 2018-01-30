@@ -2,9 +2,10 @@
 
 Repo git du workshop php de la web1 p2020 du 02/02/18.
 
-1. PHP, MySQL, Composer.. c koi ?
-2. les bdd (+adminer/phpmyadmin)
-3. TP mini projet
+* PHP, MySQL, Composer.. c koi ?
+* les bdd (+adminer/phpmyadmin)
+* 
+* TP mini projet
 
 # LISEZ L'HISTOIRE
 
@@ -28,16 +29,64 @@ Les pages dans `./public` contiennent du HTML et appellent un fichier php (modè
         |-- delete_article.php
     |-- public/
         |-- assets/
+        |-- do/
+            |-- create_article.php
+            |-- update_article.php
+            |-- delete_article.php
         |-- index.php
         |-- create_article.php
         |-- update_article.php
         |-- delete_article.php
 ~~~
 
+Dans `./do/` on mettra les fichiers permettant d'executer les actions <a href="https://github.com/Bunkermaster/crud-webp2020-g1">CRUD</a>. Par exemple : `./public/do/create_article.php` recevra les données du formulaire de `./public/create_article.php` afin de l'insérer dans la BDD.
+
 <p class="center"><img src="doc/architecture.png" alt=""></p>
 
 ## Intéraction avec la base de donnée
-...
+Pour la base de donnée, on utilisera MySQL avec <a href="http://php.net/manual/en/class.pdo.php">PDO</a>.
+
+La connexion à la BDD se fait dans `system.php`.
+
+~~~php
+// connexion à la bdd
+$dsn = "mysql:host=".$db['host'].";dbname=".$db['dbname'];
+
+$options = array(
+    PDO::ATTR_PERSISTENT    => true,
+    PDO::ATTR_ERRMODE       => PDO::ERRMODE_EXCEPTION
+);
+
+try {
+    $bdd = new PDO($dsn, $db['user'], $db['password'], $options);
+}
+// catch any errors
+catch (PDOException $e) {
+    $error = $e->getMessage();
+}
+
+// $bdd sera donc la variable à utiliser pour manipuler la BDD
+~~~
+
+Pour effectuer une requête
+
+~~~php
+$stmt = $bdd->query('SELECT * FROM articles');
+// ou
+$stmt = $bdd->prepare('SELECT * FROM articles');
+
+// On execute la requête préparée ci-dessus
+$stmt->execute(); // uniquement après un prepare
+
+$articles = $stmt->fetchAll(); // fetch() pour une seule entrée, fetchAll() pour plusieurs entrées
+~~~
+
+Les différents types de requêtes SQL
+
+* <a href="http://sql.sh/cours/insert-into">INSERT</a>
+* <a href="http://sql.sh/cours/select">SELECT</a>
+* <a href="http://sql.sh/cours/update">UPDATE</a>
+* <a href="http://sql.sh/cours/delete">DELETE</a>
 
 ## Sécurité
 
@@ -50,7 +99,7 @@ La faille XSS peut être évitée simplement en utilisant `htmlentities()` sur c
 L'injection SQL est impossible car les requête sont préparées et ce principe ne permet pas l'injection de variables directement dans la requête. Le principe des requêtes préparées est de séparer la requêtes des variables pour empêcher de détourner la requête de son but initial en y insérant un code malveillant.
 
 #### La faille CSRF
-<a href="https://openclassrooms.com/courses/protegez-vous-efficacement-contre-les-failles-web/la-csrf">La faille CSRF</a> (à ne pas confondre avec <a href="https://openclassrooms.com/courses/protegez-vous-efficacement-contre-les-failles-web/faille-crlf">CRLF</a>) est une faille qui consiste à utiliser l'URL d'un script pour effectuer une action par le biai d'un utilisateur qui en a l'accès. Notre page delete_article.php est accessible par tous, mais il s'agit d'une page qu'on appelle avec la méthode GET, autrement dit, quelqu'un pourrait vous envoyer le lien pour que vous supprimiez votre article involontairement. On contourne le problème avec l'utilisation d'un **token CSRF**. C'est un token propre à la session que vous êtes le seul à détenir, elle change à chaque connexion. On indique le token en paramètre dans l'url et on vérifie simplement si il correspond avec celui de la session. Dans ce contexte précis c'est un peu débile parce que n'importe qui peut supprimer n'importe quel article car il n'y a pas de système de login.
+<a href="https://openclassrooms.com/courses/protegez-vous-efficacement-contre-les-failles-web/la-csrf">La faille CSRF</a> (à ne pas confondre avec <a href="https://openclassrooms.com/courses/protegez-vous-efficacement-contre-les-failles-web/faille-crlf">CRLF</a>) est une faille qui consiste à utiliser l'URL d'un script pour effectuer une action par le biai d'un utilisateur qui en a l'accès. Notre page delete_article.php est accessible par tous, mais il s'agit d'une page qu'on appelle avec la méthode GET, autrement dit, quelqu'un pourrait vous envoyer le lien pour que vous supprimiez votre article involontairement. On contourne le problème avec l'utilisation d'un **token CSRF**. C'est un token propre à la session que vous êtes le seul à détenir, elle change à chaque connexion. On indique le token en paramètre dans l'url et on vérifie simplement si il correspond avec celui de la session. Dans ce contexte précis c'est un peu inutile parce que n'importe qui peut supprimer n'importe quel article car il n'y a pas de système de login.
 
 ## Le serveur php
 
@@ -61,4 +110,7 @@ php -S localhost:8000 -t ./public
 Le paramètre `-t ./public` permet d'indiquer à php d'utiliser le dossier public comme racine du serveur. Tout ce qui est en dehors du dossier public sera donc inaccessible par l'utilisateur.
 
 ## Utile pour votre SI
-...
+* <a href="https://codepen.io/terf/post/php-pdo-functions">PHP/PDO Functions</a>
+* <a href="http://php.net/manual/fr/language.exceptions.php">Les exceptions</a> (le `try { ... }`)
+
+Pensez aussi à toujours débugger vos variables avec `var_dump()`.
