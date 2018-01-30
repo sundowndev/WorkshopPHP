@@ -44,7 +44,7 @@ Les pages dans `./public` contiennent du HTML et appellent un fichier php (modè
 Il y a trois failles de sécurité possibles sur ce programme : la faille XSS, l'injection SQL et CSRF.
 
 #### La faille XSS
-La faille XSS peut être évitée simplement en utilisant `htmlentities()` sur chaque variable qu'on affiche dans le html.
+La faille XSS peut être évitée simplement en utilisant `htmlentities()` sur chaque variable qu'on affiche dans le html. La faille XSS consiste à injecter du code dans un champs afin qu'il soit traité comme du HTML dans la page. Par exemple écrire `<h1>PARCE QUE C'EST NOTRE PROJET §!!!</h1>` dans un champs de texte afin que la balise `<h1>` soit prise en compte par le navigateur comme étant une vraie balise HTML, on pourrait très bien le faire avec une balise `<script>` et donc y injecter du code malveillant. `htmlentities()` sert donc à transformer les `<` et autres caractères pouvant poser problème dans le formattage <a href="http://php.net/manual/fr/function.htmlentities.php">en entités HTML</a>.
 
 #### L'injection SQL
 L'injection SQL est impossible car les requête sont préparées et ce principe ne permet pas l'injection de variables directement dans la requête. Le principe des requêtes préparées est de séparer la requêtes des variables pour empêcher de détourner la requête de son but initial en y insérant un code malveillant.
