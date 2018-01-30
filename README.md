@@ -4,7 +4,6 @@ Repo git du workshop php de la web1 p2020 du 02/02/18.
 
 * PHP, MySQL, Composer.. c koi ?
 * les bdd (+adminer/phpmyadmin)
-* 
 * TP mini projet
 
 # LISEZ L'HISTOIRE
@@ -39,7 +38,7 @@ Les pages dans `./public` contiennent du HTML et appellent un fichier php (modè
         |-- delete_article.php
 ~~~
 
-Dans `./do/` on mettra les fichiers permettant d'executer les actions <a href="https://github.com/Bunkermaster/crud-webp2020-g1">CRUD</a>. Par exemple : `./public/do/create_article.php` recevra les données du formulaire de `./public/create_article.php` afin de l'insérer dans la BDD.
+Dans `./do` on mettra les fichiers permettant d'executer les actions <a href="https://github.com/Bunkermaster/crud-webp2020-g1">CRUD</a>. Par exemple : `./public/do/create_article.php` recevra les données du formulaire de `./public/create_article.php` afin de l'insérer dans la BDD.
 
 <p class="center"><img src="doc/architecture.png" alt=""></p>
 
@@ -48,7 +47,7 @@ Pour la base de donnée, on utilisera MySQL avec <a href="http://php.net/manual/
 
 La connexion à la BDD se fait dans `system.php`.
 
-~~~php
+~~~ php
 // connexion à la bdd
 $dsn = "mysql:host=".$db['host'].";dbname=".$db['dbname'];
 
@@ -70,7 +69,7 @@ catch (PDOException $e) {
 
 Pour effectuer une requête
 
-~~~php
+~~~ php
 $stmt = $bdd->query('SELECT * FROM articles');
 // ou
 $stmt = $bdd->prepare('SELECT * FROM articles');
