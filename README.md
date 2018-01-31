@@ -112,4 +112,4 @@ Le paramètre `-t ./public` permet d'indiquer à php d'utiliser le dossier publi
 * <a href="https://codepen.io/terf/post/php-pdo-functions">PHP/PDO Functions</a>
 * <a href="http://php.net/manual/fr/language.exceptions.php">Les exceptions</a> (le `try { ... }`)
 
-Pensez aussi à toujours débugger vos variables avec `var_dump()`.
+Pensez aussi à toujours débugger vos variables avec `var_dump()`, l'équivalent du `console.log()` en js.
